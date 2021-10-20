@@ -1,0 +1,11 @@
+<form #form [formGroup]="group" (ngSubmit)="add(); form.reset();" autocomplete="off">
+
+    <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Type a word</mat-label>
+        <input matInput type="text" formControlName="word">
+        <button *ngIf="group.get('word').valid" matSuffix mat-icon-button >
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+</form>
