@@ -1,11 +1,16 @@
-<form #form [formGroup]="group" (ngSubmit)="add(); form.reset();" autocomplete="off">
+<form #form [formGroup]="group" (ngSubmit)="search(); form.reset();" autocomplete="off">
 
-    <mat-form-field class="example-form-field" appearance="fill">
+    <mat-form-field appearance="outline">
         <mat-label>Type a word</mat-label>
         <input matInput type="text" formControlName="word">
-        <button *ngIf="group.get('word').valid" matSuffix mat-icon-button >
-            <mat-icon>close</mat-icon>
-        </button>
+        <mat-icon matSuffix (click)="form.reset();">close</mat-icon>
     </mat-form-field>
-
+    <button mat-fab [disabled]="group.invalid">
+        <mat-icon>favorite</mat-icon>
+    </button>
 </form>
+
+
+<div *ngFor="let obj of retorno;">
+    <app-definition [definition]="obj"></app-definition>
+</div>

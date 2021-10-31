@@ -10,6 +10,7 @@ import { DictionaryService } from '../dictionary.service';
 export class InsertwordComponent implements OnInit {
 
   group: FormGroup;
+  retorno;
 
   constructor(
     private fb: FormBuilder,
@@ -17,17 +18,26 @@ export class InsertwordComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dictionary.dicionarios().subscribe(data => {
+      console.log(data);
+
+    });
+
     this.group = this.fb.group({
       word: [null, [Validators.required]]
     });
   }
 
-  add() {
-    let w = this.dictionary.findWord('lesen').subscribe(d => {
-      console.log('d', d);
-    });
-    console.log('w', w);
+  search() {
+    /*
+    let word = this.group.get('word').value;
+    this.dictionary.findWord(word).subscribe(d => {
+      this.retorno = d;
+    });*/
 
+    this.dictionary.findPons().subscribe(d => {
+      console.log(d);
+    });
   }
 
 }
