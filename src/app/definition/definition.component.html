@@ -1,5 +1,12 @@
 <div class="card">
-    <p>Word: {{definition.word}}</p>
-    <p>Phonetic: {{definition.phonetic}}</p>
-    <p>Origin: {{definition.origin}}</p>
+    <div [innerHTML]="definition.headword_full"></div>
+    <div *ngFor="let arab of definition.arabs">
+        <div [innerHTML]="arab.header"></div>
+        
+        <div *ngFor="let translation of arab.translations">
+            <div [innerHTML]="translation.source"></div>
+            <div [innerHTML]="translation.target"></div>
+        </div>
+
+    </div>
 </div>

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { WordDefinition } from 'src/modal/WordDefinition';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,27 @@ export class DictionaryService {
     return this.http.get('https://api.dictionaryapi.dev/api/v2/entries/de/' + word);
   }
 
-  findPons() {
-    return this.http.get('api/dictionary?l=deen&q=house', requestOptions);
+  findPons(word: string) {
+    return this.http.get('api/dictionary?l=dept&q=' + word, requestOptions);
   }
 
   dicionarios() {
     return this.http.get('api/dictionaries?language=pt');
+  }
+
+  parse2WordDefinition(ret: any): Array<WordDefinition> {
+    let list: Array<WordDefinition> = [];
+    ret[0].hits.forEach(hit => {
+      hit.roms.forEach(rom => {
+        let definition = new WordDefinition();
+        definition.headword = rom.headword;
+        definition.headword_full = rom.headword_full;
+        definition.wordclass = rom.wordclass;
+        definition.arabs = rom.arabs;
+        list.push(definition);
+      });
+    });
+    return list;
   }
 
 }
