@@ -1,0 +1,70 @@
+.card {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.headword {
+    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: rgb(238, 238, 238);
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: blue;
+}
+
+.font-helvetica {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    color: rgb(87, 86, 86);
+}
+
+.phonetics {
+    @extend .font-helvetica;
+}
+
+.flexion {
+    @extend .font-helvetica;
+}
+
+.wordclass {
+    @extend .font-helvetica;
+    font-style: italic;
+}
+
+.verbclass {
+    @extend .font-helvetica;
+    font-style: italic;
+}
+
+.genus {
+    @extend .font-helvetica;
+    font-size: 20px;
+}
+
+.arab-header {
+    @extend .font-helvetica;
+    padding: 5px 5px 5px 15px;
+}
+
+.translation {
+    @extend .font-helvetica;
+    padding: 5px 5px 5px 30px;
+    display: inline-flex;
+
+    .headword {
+        @extend .font-helvetica;
+        background-color: white;
+        padding: 0;
+    }
+}
+
+.target {
+    font-style: italic;
+    margin-left: 10px;
+    .genus {
+        @extend .font-helvetica;
+    }
+    
+}

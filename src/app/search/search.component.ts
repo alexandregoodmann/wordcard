@@ -20,15 +20,14 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.group = this.fb.group({
-      word: [null, [Validators.required]]
+      word: [null, null]
     });
-    this.retorno = this.dictionary.parse2WordDefinition(obj);
   }
 
   search() {
     let word = this.group.get('word').value;
     this.dictionary.findPons(word).subscribe(ret => {
-      this.retorno = this.dictionary.parse2WordDefinition(obj);
+      this.retorno = this.dictionary.parse2WordDefinition(ret);
     });
   }
 
@@ -51,7 +50,7 @@ export const obj = [
                 "header": "1. lesen <span class=\"sense\">(Buch, Zeitung)</span>:",
                 "translations": [
                   {
-                    "source": "<strong class=\"headword\">lesen</strong>",
+                    "source": "<strong class=\"'headword'\">lesen</strong>",
                     "target": "ler"
                   },
                   {

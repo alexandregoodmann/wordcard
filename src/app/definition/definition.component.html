@@ -1,12 +1,12 @@
 <div class="card">
-    <div [innerHTML]="definition.headword_full"></div>
+    <div class="headword" [innerHTML]="definition.headword_full"></div>
     <div *ngFor="let arab of definition.arabs">
-        <div [innerHTML]="arab.header"></div>
-        
-        <div *ngFor="let translation of arab.translations">
-            <div [innerHTML]="translation.source"></div>
-            <div [innerHTML]="translation.target"></div>
-        </div>
 
+        <div class="arab-header" [innerHTML]="arab.header"></div>
+
+        <div class="translation" *ngFor="let translation of arab.translations">
+            <div [innerHTML]="translation.source"></div>
+            <div class="target" [innerHTML]="translation.target"></div>
+        </div>
     </div>
 </div>

@@ -125,5 +125,10 @@
       }
     }
   },
-  "defaultProject": "wordcard"
+  "defaultProject": "wordcard",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
