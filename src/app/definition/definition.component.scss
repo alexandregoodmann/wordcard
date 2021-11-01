@@ -33,7 +33,17 @@
     font-style: italic;
 }
 
+.info {
+    @extend .font-helvetica;
+    font-style: italic;
+}
+
 .verbclass {
+    @extend .font-helvetica;
+    font-style: italic;
+}
+
+.auxiliary_verb {
     @extend .font-helvetica;
     font-style: italic;
 }
@@ -63,8 +73,10 @@
 .target {
     font-style: italic;
     margin-left: 10px;
+    background-color: #f7e9d0;
+    border-radius: 5px;
+    padding: 0px 4px 0px 4px;
     .genus {
         @extend .font-helvetica;
     }
-    
 }
