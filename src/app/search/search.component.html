@@ -1,7 +1,12 @@
 <form #form [formGroup]="group" class="example" (ngSubmit)="search(); form.reset();" autocomplete="off">
     <input type="text" placeholder="Search.." formControlName="word">
-    <button type="submit"><i class="fa fa-search"></i></button>
+    <button class="search" type="submit"><i class="fa fa-search"></i></button>
+    <button type="button" (click)="add()" [disabled]="retorno.length == 0"><i class="fa fa-plus"></i></button>
 </form>
+
+<div *ngIf="loaderService.isLoading | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
 
 <div *ngFor="let obj of retorno;">
     <app-definition [definition]="obj"></app-definition>

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { Word } from 'src/modal/Word';
 import { WordDefinition } from 'src/modal/WordDefinition';
-import { DictionaryService } from '../dictionary.service';
+import { DictionaryService } from '../services/dictionary.service';
+import { LoaderService } from '../services/loader.service';
+import { WordService } from '../services/word.service';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +19,10 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dictionary: DictionaryService
+    private dictionary: DictionaryService,
+    private loaderService: LoaderService,
+    private wordService: WordService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -31,93 +38,15 @@ export class SearchComponent implements OnInit {
     });
   }
 
-}
+  add() {
+    let word = new Word();
+    word.level = 'A1.1';
+    word.word = this.retorno[0].headword;
 
-export const obj = [
-  {
-    "lang": "de",
-    "hits": [
-      {
-        "type": "entry",
-        "opendict": false,
-        "roms": [
-          {
-            "headword": "lesen",
-            "headword_full": "lesen <span class=\"flexion\">&lt;liest, las, gelesen&gt;</span> <span class='phonetics'>[ˈle:zən]</span> <span class=\"wordclass\"><acronym title=\"verbo\">VERBO</acronym></span> <span class=\"verbclass\"><acronym title=\"verbo transitivo\">trans</acronym></span>",
-            "wordclass": "Verbo transitivo",
-            "arabs": [
-              {
-                "header": "1. lesen <span class=\"sense\">(Buch, Zeitung)</span>:",
-                "translations": [
-                  {
-                    "source": "<strong class=\"'headword'\">lesen</strong>",
-                    "target": "ler"
-                  },
-                  {
-                    "source": "<span class=\"idiom_proverb\">die Schrift ist kaum zu <strong class=\"tilde\">lesen</strong></span>",
-                    "target": "a letra é quase ilegível"
-                  },
-                  {
-                    "source": "<span class=\"idiom_proverb\">die Messe <strong class=\"tilde\">lesen</strong></span>",
-                    "target": "rezar a missa"
-                  },
-                  {
-                    "source": "<span class=\"idiom_proverb\"><acronym title=\"jemandes\">jds</acronym> Gedanken <strong class=\"tilde\">lesen</strong></span>",
-                    "target": "ler os pensamentos de alguém"
-                  }
-                ]
-              },
-              {
-                "header": "2. lesen <span class=\"sense\">(ernten)</span>:",
-                "translations": [
-                  {
-                    "source": "<strong class=\"headword\">lesen</strong>",
-                    "target": "apanhar"
-                  },
-                  {
-                    "source": "<strong class=\"headword\">lesen</strong>",
-                    "target": "colher"
-                  },
-                  {
-                    "source": "<span class=\"idiom_proverb\">Trauben <strong class=\"tilde\">lesen</strong></span>",
-                    "target": "vindimar"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "entry",
-        "opendict": false,
-        "roms": [
-          {
-            "headword": "Lese",
-            "headword_full": "Lese <span class=\"flexion\">&lt;-n&gt;</span> <span class='phonetics'>[ˈle:zə]</span> <span class=\"wordclass\"><acronym title=\"substantivo\">SUBST</acronym></span> <span class=\"genus\"><acronym title=\"feminino\">f</acronym></span>",
-            "wordclass": "Substantivo",
-            "arabs": [
-              {
-                "header": "",
-                "translations": [
-                  {
-                    "source": "<strong class=\"headword\">Lese</strong>",
-                    "target": "apanha <span class=\"genus\"><acronym title=\"feminino\">f</acronym></span>"
-                  },
-                  {
-                    "source": "<strong class=\"headword\">Lese</strong>",
-                    "target": "colheita <span class=\"genus\"><acronym title=\"feminino\">f</acronym></span>"
-                  },
-                  {
-                    "source": "<strong class=\"headword\">Lese</strong> <span class=\"sense\">(Weinlese)</span>",
-                    "target": "vindima <span class=\"genus\"><acronym title=\"feminino\">f</acronym></span>"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    this.wordService.create(word).subscribe(() => { }, () => { }, () => {
+      this.snackBar.open('Word added', null, { duration: 3000 });
+    });
+
   }
-]
+
+}
