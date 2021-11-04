@@ -43,9 +43,14 @@ export class SearchComponent implements OnInit {
     word.level = 'A1.1';
     word.word = this.retorno[0].headword;
 
-    this.wordService.create(word).subscribe(() => { }, () => { }, () => {
-      this.snackBar.open('Word added', null, { duration: 3000 });
-    });
+    this.wordService.create(word).subscribe(() => { },
+      (err) => {
+        if (err.status && err.status == 'BUSINESS_ERROR') {
+          this.snackBar.open(err.message, null, { duration: 3000 });
+        }
+      }, () => {
+        this.snackBar.open('Word added', null, { duration: 3000 });
+      });
 
   }
 
