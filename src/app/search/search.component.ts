@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Word } from 'src/modal/Word';
 import { WordDefinition } from 'src/modal/WordDefinition';
 import { DictionaryService } from '../services/dictionary.service';
