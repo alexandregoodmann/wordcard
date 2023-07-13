@@ -4,7 +4,7 @@
     <button type="button" (click)="add()" [disabled]="retorno.length == 0"><i class="fa fa-plus"></i></button>
 </form>
 
-<div *ngIf="loaderService.isLoading | async">
+<div *ngIf="isLoading | async">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 

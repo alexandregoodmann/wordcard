@@ -11,7 +11,7 @@ export class BasicCrudService<T> {
   private _url;
   private _http: HttpClient;
 
-  constructor(url: string, http: HttpClient) {
+  constructor(url: String, http: HttpClient) {
     this._url = url;
     this._http = http;
   }

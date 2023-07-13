@@ -16,6 +16,7 @@ export class SearchComponent implements OnInit {
 
   group: FormGroup;
   retorno: Array<WordDefinition> = [];
+  isLoading = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
