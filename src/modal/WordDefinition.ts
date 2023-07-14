@@ -5,4 +5,5 @@ export class WordDefinition {
   headword_full;
   wordclass;
   arabs: Array<Arab>;
+  json?: string;
 }

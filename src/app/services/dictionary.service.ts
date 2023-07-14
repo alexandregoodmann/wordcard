@@ -9,21 +9,21 @@ export class DictionaryService {
 
   constructor(private http: HttpClient) { }
 
-  findWord(word: string) {
-    return this.http.get('https://api.dictionaryapi.dev/api/v2/entries/de/' + word);
-  }
-
   findPons(word: string) {
     return this.http.get('api/dictionary?l=dept&q=' + word, requestOptions);
+  }
+
+  findWord(word: string) {
+    return this.http.get('https://api.dictionaryapi.dev/api/v2/entries/de/' + word);
   }
 
   dicionarios() {
     return this.http.get('api/dictionaries?language=pt');
   }
 
-  parse2WordDefinition(ret: any): Array<WordDefinition> {
+  parse2WordDefinition(json: any): Array<WordDefinition> {
     let list: Array<WordDefinition> = [];
-    ret[0].hits.forEach(hit => {
+    json[0].hits.forEach(hit => {
       hit.roms.forEach(rom => {
         let definition = new WordDefinition();
         definition.headword = rom.headword;
@@ -33,6 +33,8 @@ export class DictionaryService {
         list.push(definition);
       });
     });
+    console.log(list);
+    
     return list;
   }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Word } from 'src/modal/Word';
 import { WordDefinition } from 'src/modal/WordDefinition';
 import { DictionaryService } from '../services/dictionary.service';
 import { LoaderService } from '../services/loader.service';
@@ -15,8 +14,9 @@ import { WordService } from '../services/word.service';
 export class SearchComponent implements OnInit {
 
   group: FormGroup;
-  retorno: Array<WordDefinition> = [];
+  wordDefinitions: Array<WordDefinition> = [];
   isLoading = this.loaderService.isLoading;
+  json: any;
 
   constructor(
     private fb: FormBuilder,
@@ -34,17 +34,14 @@ export class SearchComponent implements OnInit {
 
   search() {
     let word = this.group.get('word').value;
-    this.dictionary.findPons(word).subscribe(ret => {
-      this.retorno = this.dictionary.parse2WordDefinition(ret);
+    this.dictionary.findPons(word).subscribe(json => {
+      this.json = json;
+      this.wordDefinitions = this.dictionary.parse2WordDefinition(json);
     });
   }
 
   add() {
-    let word = new Word();
-    word.level = 'A1.1';
-    word.word = this.retorno[0].headword;
-
-    this.wordService.create(word).subscribe(() => { },
+    this.wordService.create(this.json).subscribe(() => { },
       (err) => {
         if (err.status && err.status == 'BUSINESS_ERROR') {
           this.snackBar.open(err.message, null, { duration: 3000 });
@@ -52,7 +49,6 @@ export class SearchComponent implements OnInit {
       }, () => {
         this.snackBar.open('Word added', null, { duration: 3000 });
       });
-
   }
 
 }
