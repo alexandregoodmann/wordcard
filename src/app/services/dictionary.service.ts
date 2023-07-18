@@ -30,11 +30,10 @@ export class DictionaryService {
         definition.headword_full = rom.headword_full;
         definition.wordclass = rom.wordclass;
         definition.arabs = rom.arabs;
+        definition.json = json;
         list.push(definition);
       });
     });
-    console.log(list);
-    
     return list;
   }
 

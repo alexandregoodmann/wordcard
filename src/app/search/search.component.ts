@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { WordDefinition } from 'src/modal/WordDefinition';
+import { WordDTO, WordDefinition } from 'src/modal/WordDefinition';
 import { DictionaryService } from '../services/dictionary.service';
 import { LoaderService } from '../services/loader.service';
 import { WordService } from '../services/word.service';
@@ -16,7 +16,6 @@ export class SearchComponent implements OnInit {
   group: FormGroup;
   wordDefinitions: Array<WordDefinition> = [];
   isLoading = this.loaderService.isLoading;
-  json: any;
 
   constructor(
     private fb: FormBuilder,
@@ -35,20 +34,18 @@ export class SearchComponent implements OnInit {
   search() {
     let word = this.group.get('word').value;
     this.dictionary.findPons(word).subscribe(json => {
-      this.json = json;
       this.wordDefinitions = this.dictionary.parse2WordDefinition(json);
-    });
-  }
+    }, error => {
 
-  add() {
-    this.wordService.create(this.json).subscribe(() => { },
-      (err) => {
-        if (err.status && err.status == 'BUSINESS_ERROR') {
-          this.snackBar.open(err.message, null, { duration: 3000 });
-        }
-      }, () => {
-        this.snackBar.open('Word added', null, { duration: 3000 });
-      });
+    }, () => {
+      this.wordDefinitions.forEach(word => {
+        let dto = new WordDTO();
+        dto.headword = word.headword as string;
+        dto.headword_full = word.headword_full as string;
+        dto.wordclass = word.wordclass as string;
+        this.wordService.add(dto).subscribe();
+      })
+    });
   }
 
 }

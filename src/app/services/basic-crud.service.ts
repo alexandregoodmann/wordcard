@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class BasicCrudService<T> {
 
-  private _url;
+  public _url;
   private _http: HttpClient;
 
   constructor(url: String, http: HttpClient) {
