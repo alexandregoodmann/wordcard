@@ -32,19 +32,24 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
+    this.wordDefinitions = [];
     let word = this.group.get('word').value;
     this.dictionary.findPons(word).subscribe(json => {
-      this.wordDefinitions = this.dictionary.parse2WordDefinition(json);
+      if (json != undefined && json != null) {
+        this.wordDefinitions = this.dictionary.parse2WordDefinition(json);
+      }
     }, error => {
-
+      console.log(error);
     }, () => {
-      this.wordDefinitions.forEach(word => {
-        let dto = new WordDTO();
-        dto.headword = word.headword as string;
-        dto.headword_full = word.headword_full as string;
-        dto.wordclass = word.wordclass as string;
-        this.wordService.add(dto).subscribe();
-      })
+      if (this.wordDefinitions.length > 0) {
+        this.wordDefinitions.forEach(word => {
+          let dto = new WordDTO();
+          dto.headword = word.headword as string;
+          dto.headword_full = word.headword_full as string;
+          dto.wordclass = word.wordclass as string;
+          this.wordService.add(dto).subscribe();
+        })
+      }
     });
   }
 
