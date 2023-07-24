@@ -9,17 +9,10 @@ export class DictionaryService {
 
   constructor(private http: HttpClient) { }
 
-  findPons(word: string) {
-    return this.http.get('api/dictionary?l=dept&q=' + word, requestOptions);
-  }
-
   findWord(word: string) {
-    return this.http.get('https://api.dictionaryapi.dev/api/v2/entries/de/' + word);
+    return this.http.get('https://api.pons.com/v1/dictionary?q=' + word + '&l=dept');
   }
 
-  dicionarios() {
-    return this.http.get('api/dictionaries?language=pt');
-  }
 
   parse2WordDefinition(json: any): Array<WordDefinition> {
     let list: Array<WordDefinition> = [];

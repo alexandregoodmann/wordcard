@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
   search() {
     this.wordDefinitions = [];
     let word = this.group.get('word').value;
-    this.dictionary.findPons(word).subscribe(json => {
+    this.dictionary.findWord(word).subscribe(json => {
       if (json != undefined && json != null) {
         this.wordDefinitions = this.dictionary.parse2WordDefinition(json);
       }

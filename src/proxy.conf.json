@@ -7,14 +7,5 @@
             "^/api": ""
         },
         "changeOrigin": true
-    },
-        "/v1/*": {
-        "target": "http://localhost:8082/v1",
-        "secure": false,
-        "logLevel": "debug",
-        "pathRewrite": {
-            "^/v1": ""
-        },
-        "changeOrigin": true
     }
 }
