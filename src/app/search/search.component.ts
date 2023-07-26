@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
   search() {
     this.wordDefinitions = [];
     let word = this.group.get('word').value;
-    this.wordService.findWord(word).subscribe(json => {
+    this.wordService.search(word).subscribe(json => {
       if (json != undefined && json != null) {
         this.wordDefinitions = this.wordService.parse2WordDefinition(json);
       }

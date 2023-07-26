@@ -14,8 +14,8 @@ export class WordService extends BasicCrudService<WordDefinition>{
     super('http://localhost:8082/v1/wordcard', http);
   }
 
-  findWord(word: string) {
-    return this.http.get('api/dictionary?l=dept&q=' + word, requestOptions);
+  search(word: string) {
+    return this.http.get('api/dictionary?q=' + word + '&l=dept', requestOptions);
   }
 
   add(word: WordDTO): Observable<any> {
