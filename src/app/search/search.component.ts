@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WordDTO, WordDefinition } from 'src/modal/WordDefinition';
-import { DictionaryService } from '../services/dictionary.service';
 import { LoaderService } from '../services/loader.service';
 import { WordService } from '../services/word.service';
 
@@ -19,7 +18,6 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dictionary: DictionaryService,
     private loaderService: LoaderService,
     private wordService: WordService,
     private snackBar: MatSnackBar
@@ -34,9 +32,9 @@ export class SearchComponent implements OnInit {
   search() {
     this.wordDefinitions = [];
     let word = this.group.get('word').value;
-    this.dictionary.findWord(word).subscribe(json => {
+    this.wordService.findWord(word).subscribe(json => {
       if (json != undefined && json != null) {
-        this.wordDefinitions = this.dictionary.parse2WordDefinition(json);
+        this.wordDefinitions = this.wordService.parse2WordDefinition(json);
       }
     }, error => {
       console.log(error);
