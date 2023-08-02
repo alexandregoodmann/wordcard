@@ -12,12 +12,14 @@ import { AppComponent } from './app.component';
 import { DefinitionComponent } from './definition/definition.component';
 import { SearchComponent } from './search/search.component';
 import { InterceptorService } from './services/interceptor.service';
+import { CartaoComponent } from './cartao/cartao.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DefinitionComponent,
-    SearchComponent
+    SearchComponent,
+    CartaoComponent
   ],
   imports: [
     HttpClientModule,

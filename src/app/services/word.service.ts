@@ -2,24 +2,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { WordDTO, WordDefinition } from 'src/modal/WordDefinition';
-import { BasicCrudService, httpOptions } from './basic-crud.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WordService extends BasicCrudService<WordDefinition>{
+export class WordService {
 
-  constructor(private http: HttpClient) {
-    super('http://localhost:8082/v1/wordcard', http);
-  }
+  constructor(private http: HttpClient) { }
 
   search(word: string) {
     return this.http.get('api/dictionary?q=' + word + '&l=dept', requestOptions);
   }
 
   add(word: WordDTO): Observable<any> {
-    return this.http.post('http://localhost:8082/v1/wordcard/word', word, httpOptions).pipe(
+    return this.http.post(`${environment.url}/word`, word, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -40,9 +38,18 @@ export class WordService extends BasicCrudService<WordDefinition>{
     return list;
   }
 
+  handleError(error) {
+    return throwError(error.error);
+  }
+
 }
+
 const requestOptions = {
   headers: new HttpHeaders({
     'X-Secret': '1b1138b30031b9b8fb2e8d010d8d4afe0f18a1c51c4795c7f3428ec1a51e651f'
   }),
+};
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
