@@ -1,6 +1,14 @@
 {
-    "/api/*": {
+    "/pons/*": {
         "target": "https://api.pons.com/v1",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/pons": ""
+        }
+    },
+    "/api/*": {
+        "target": "http://10.5.0.8:8082/v1/wordcard",
         "secure": true,
         "changeOrigin": true,
         "pathRewrite": {

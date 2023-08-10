@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { WordDTO, WordDefinition } from 'src/modal/WordDefinition';
 
 @Injectable({
@@ -14,11 +15,11 @@ export class WordService {
   ) { }
 
   search(word: string) {
-    return this.http.get('/api/dictionary?q=' + word + '&l=dept', requestOptions);
+    return this.http.get('/pons/dictionary?q=' + word + '&l=dept', requestOptions);
   }
 
   add(word: WordDTO): Observable<any> {
-    return this.http.post('http://localhost:8082/v1/wordcard/word', word, httpOptions).pipe(
+    return this.http.post('/api/word', word, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
