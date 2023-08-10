@@ -73,7 +73,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "wordcard:build:production"
+              "browserTarget": "wordcard:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             }
           }
         },

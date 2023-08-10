@@ -1,11 +1,10 @@
 {
     "/api/*": {
         "target": "https://api.pons.com/v1",
-        "secure": false,
-        "logLevel": "debug",
+        "secure": true,
+        "changeOrigin": true,
         "pathRewrite": {
             "^/api": ""
-        },
-        "changeOrigin": true
+        }
     }
 }
