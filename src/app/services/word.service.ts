@@ -15,11 +15,11 @@ export class WordService {
   ) { }
 
   search(word: string) {
-    return this.http.get('/pons/dictionary?q=' + word + '&l=dept', requestOptions);
+    return this.http.get(`${environment.url}/word/${word}`, httpOptions);
   }
 
   add(word: WordDTO): Observable<any> {
-    return this.http.post('/api/word', word, httpOptions).pipe(
+    return this.http.post(`${environment.url}/word/`, word, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -44,12 +44,6 @@ export class WordService {
     return throwError(error.error);
   }
 }
-
-const requestOptions = {
-  headers: new HttpHeaders({
-    'X-Secret': '1b1138b30031b9b8fb2e8d010d8d4afe0f18a1c51c4795c7f3428ec1a51e651f'
-  }),
-};
 
 export const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
