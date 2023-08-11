@@ -1,23 +1,25 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { WordDTO, WordDefinition } from 'src/modal/WordDefinition';
 import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { WordDTO, WordDefinition } from 'src/modal/WordDefinition';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WordService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   search(word: string) {
-    return this.http.get('api/dictionary?q=' + word + '&l=dept', requestOptions);
+    return this.http.get(`${environment.url}/word/${word}`, httpOptions);
   }
 
   add(word: WordDTO): Observable<any> {
-    return this.http.post(`${environment.url}/word`, word, httpOptions).pipe(
+    return this.http.post(`${environment.url}/word/`, word, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -41,15 +43,8 @@ export class WordService {
   handleError(error) {
     return throwError(error.error);
   }
-
 }
 
-const requestOptions = {
-  headers: new HttpHeaders({
-    'X-Secret': '1b1138b30031b9b8fb2e8d010d8d4afe0f18a1c51c4795c7f3428ec1a51e651f'
-  }),
-};
-
-const httpOptions = {
+export const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
