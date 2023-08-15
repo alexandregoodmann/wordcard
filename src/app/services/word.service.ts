@@ -26,6 +26,10 @@ export class WordService {
     });
   }
 
+  list(): Observable<WordDefinition[]> {
+    return this.http.get<WordDefinition[]>(`${environment.url}/word`, httpOptions);
+  }
+
   handleError(error) {
     return throwError(error.error);
   }
