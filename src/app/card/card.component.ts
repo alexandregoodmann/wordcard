@@ -33,10 +33,15 @@ export class CardComponent implements OnInit {
   }
 
   next() {
+    this.show = false;
     if (this.wordDefinitions.length != (this.index + 1)) {
       this.index++;
       this.wordDefinition = this.wordDefinitions[this.index];
     }
+  }
+
+  showTranslation() {
+    this.show = !this.show;
   }
 
 }
