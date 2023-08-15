@@ -43,7 +43,7 @@ const routes: Routes = [
     CardComponent
   ],
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
+    // RouterModule.forRoot(routes, { useHash: true }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
