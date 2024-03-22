@@ -5,7 +5,7 @@
 export const environment = {
   tempoSnackBar: 2000,
   production: false,
-  url: 'http://10.5.0.8:8082/v1/wordcard'
+  url: 'http://199-244-49-87.cloud-xip.com:8082/v1/wordcard'
 };
 
 //url: 'http://10.5.0.8:8082/v1/wordcard'
