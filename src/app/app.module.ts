@@ -8,12 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
+import { ClassesComponent } from './classes/classes.component';
 import { DefinitionComponent } from './definition/definition.component';
 import { SearchComponent } from './search/search.component';
 import { InterceptorService } from './services/interceptor.service';
@@ -40,7 +42,8 @@ const routes: Routes = [
     AppComponent,
     DefinitionComponent,
     SearchComponent,
-    CardComponent
+    CardComponent,
+    ClassesComponent
   ],
   imports: [
     // RouterModule.forRoot(routes, { useHash: true }),
@@ -57,7 +60,8 @@ const routes: Routes = [
     MatSnackBarModule,
     MatCardModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule
 
   ],
   providers: [

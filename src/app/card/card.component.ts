@@ -9,10 +9,6 @@ import { WordService } from '../services/word.service';
 })
 export class CardComponent implements OnInit {
 
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
-
   wordDefinitions: WordDefinition[];
   wordDefinition: WordDefinition;
   index = 0;
@@ -21,14 +17,10 @@ export class CardComponent implements OnInit {
   constructor(private wordService: WordService) { }
 
   ngOnInit(): void {
-    this.wordService.list().subscribe(data => {
+    this.wordService.cardDS.subscribe(data => {
+      this.index=0;
       this.wordDefinitions = data;
-    }, (error) => {
-      console.log(error);
-    }, () => {
-      this.wordService.parseToWordDefinition(this.wordDefinitions);
-      this.wordDefinition = this.wordDefinitions[0];
-      console.log(this.wordDefinitions);
+      this.wordDefinition=this.wordDefinitions[this.index];
     });
   }
 

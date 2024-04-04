@@ -5,11 +5,11 @@
 export const environment = {
   tempoSnackBar: 2000,
   production: false,
-  url: 'http://199-244-49-87.cloud-xip.com:8082/v1/wordcard'
+  url: 'http://localhost:8082/v1/wordcard'
 };
 
 //url: 'http://10.5.0.8:8082/v1/wordcard'
-
+// url: 'http://199-244-49-87.cloud-xip.com:8082/v1/wordcard'
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
